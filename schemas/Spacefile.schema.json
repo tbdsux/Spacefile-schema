@@ -1,0 +1,164 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Spacefile",
+  "additionalProperties": false,
+  "description": "Adds json schema for Spacefile files which enables auto completions and suggestions",
+  "type": "object",
+  "properties": {
+    "v": {
+      "description": "The first key/value pair in your Spacefile should be the Spacefile version. The latest version at the moment is 0.",
+      "type": "integer",
+      "default": 0,
+      "enum": [0]
+    },
+    "icon": {
+      "description": "Specify a path to an image file to use as your app’s icon. The icon will be used wherever your app is displayed (e.g. the Canvas).",
+      "type": "string"
+    },
+    "app_name": {
+      "description": "Specify a name for your app. This name will be used wherever your app is displayed (e.g. the Canvas).",
+      "maxLength": 12
+    },
+    "micros": {
+      "description": "List all the micros your app uses and configures each one individually.",
+      "type": "array",
+      "items": {
+        "title": "Micros",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of your micro. Can only contain alphanumeric characters and hyphen. Start with alphanumeric characters."
+          },
+          "src": {
+            "type": "string",
+            "format": "uri",
+            "description": "The relative path to the root directory of your micro which contains the code for your micro to run."
+          },
+          "engine": {
+            "type": "string",
+            "description": "Runtime for the Micro.",
+            "enum": [
+              "static",
+              "react",
+              "svelte",
+              "vue",
+              "next",
+              "nuxt",
+              "svelte-kit",
+              "python3.9",
+              "python3.8",
+              "nodejs16",
+              "custom"
+            ]
+          },
+          "primary": {
+            "type": "boolean",
+            "default": true,
+            "description": "Required if your Spacefile contains more than one Micro. Used to determine which should be the entrypoint of your application."
+          },
+          "path": {
+            "type": "string",
+            "description": "If your app contains more than one micro, use `path` to specify under whic path relative to the hostname a Micro should receive requests."
+          },
+          "serve": {
+            "type": "string",
+            "description": "Specify which directory should be served for your static Micro. Can only be used for Micros with the `static` engine."
+          },
+          "commands": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Specify a set of commands to run before packaging the micro."
+          },
+          "include": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Specify which files and directoeris in your Micro's `src` should be part of the final app package."
+          },
+          "run": {
+            "type": "string",
+            "description": "Specify a command which starts your Micro."
+          },
+          "presets": {
+            "type": "object",
+            "properties": {
+              "env": {
+                "description": "Specify environment variables that the user can set for a Micro.",
+                "type": "array",
+                "items": {
+                  "title": "Environment Variables",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "Environment variable name or key"
+                    },
+                    "description": {
+                      "type": "string",
+                      "description": "Human friendly description of the environment variable"
+                    },
+                    "default": {
+                      "type": "string",
+                      "description": "Default value for the variable"
+                    }
+                  }
+                }
+              },
+              "api_keys": {
+                "type": "boolean",
+                "description": "Enable the use of API keys to access a private routes of a Micro. The user of your app will be able to generate API keys in the app settings and can use them in requests to a Micro using the X-Space-App-Key HTTP header."
+              }
+            }
+          },
+          "public_routes": {
+            "type": "array",
+            "description": "Define paths of your Micro which should be available to the public. These routes will not be protected behind auth.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "actions": {
+            "type": "array",
+            "description": "Specify actions that perform certain tasks inside your app on a specific trigger like a schedule.",
+            "items": {
+              "title": "Actions",
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "A unique identifier for the action (needs to be unique across the app)"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "A human readable name for the action (needs to be unique across the app)"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "A human readable description for the action (max 142 chars)",
+                  "maxLength": 142
+                },
+                "trigger": {
+                  "type": "string",
+                  "enum": ["schedule"],
+                  "default": "schedule",
+                  "description": "What triggers the action. Needs to be set to schedule"
+                },
+                "default_interval": {
+                  "type": "string",
+                  "description": "Interval with which the schedule will run at (supported intervals)"
+                }
+              }
+            },
+            "required": ["id", "name", "trigger", "default_interval"]
+          }
+        }
+      },
+      "required": ["name", "src", "engine"]
+    }
+  },
+
+  "required": ["v", "micros"]
+}

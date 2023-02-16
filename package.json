@@ -1,0 +1,36 @@
+{
+  "name": "spacefile-schema",
+  "displayName": "Spacefile Config Schema",
+  "version": "0.1.0",
+  "icon": "icon.png",
+  "description": "Adds json schema for Spacefile files which enables auto completions and suggestions",
+  "engines": {
+    "vscode": "^1.22.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tbdsux/Spacefile-schema.git"
+  },
+  "categories": [
+    "Other"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "yaml",
+        "extensions": [
+          "Spacefile"
+        ]
+      }
+    ],
+    "yamlValidation": [
+      {
+        "fileMatch": "Spacefile",
+        "url": "./schemas/Spacefile.schema.json"
+      }
+    ]
+  },
+  "publisher": "tbdsux",
+  "author": "Joshue Abance <euhsojlogro112002@gmail.com>",
+  "license": "MIT"
+}
