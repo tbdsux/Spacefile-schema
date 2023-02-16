@@ -4,6 +4,16 @@ Adds json schema for `Spacefile` files which enables auto completions and sugges
 
 ![Demo](./demo.gif)
 
+**[ICON](./icon.png)** credits to [Deta Space](https://deta.space/)
+
+## Install
+
+```
+ext install tbdsux.spacefile-schema
+```
+
+[Marketplace](https://marketplace.visualstudio.com/items?itemName=tbdsux.spacefile-schema)
+
 ### What's Spacefile?
 
 The Spacefile file contains the configuration of your app and is used by [Deta Space](https://deta.space/) to understand what your app looks like and how to run it.
