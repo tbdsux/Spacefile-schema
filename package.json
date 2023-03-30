@@ -1,7 +1,7 @@
 {
   "name": "spacefile-schema",
   "displayName": "Spacefile Config Schema",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "icon": "icon.png",
   "description": "Adds json schema for Spacefile files which enables auto completions and suggestions",
   "engines": {

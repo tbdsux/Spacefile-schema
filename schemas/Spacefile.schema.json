@@ -28,7 +28,8 @@
         "properties": {
           "name": {
             "type": "string",
-            "description": "The name of your micro. Can only contain alphanumeric characters and hyphen. Start with alphanumeric characters."
+            "description": "The name of your micro. Can only contain alphanumeric characters and hyphen. Start with alphanumeric characters.",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$"
           },
           "src": {
             "type": "string",
@@ -83,6 +84,10 @@
             "type": "string",
             "description": "Specify a command which starts your Micro."
           },
+          "dev": {
+            "type": "string",
+            "description": "Specify a command which starts your Micro in **development** mode. This command will be used to start your micro when you run `space dev`."
+          },
           "presets": {
             "type": "object",
             "properties": {
@@ -119,6 +124,10 @@
             "items": {
               "type": "string"
             }
+          },
+          "public": {
+            "type": "boolean",
+            "description": "Specify wheter a Micro should be available to the public. If public is set to false, the Micro will not be available to the public and will only be accessible to the app’s owner. `public: true` is just a shorthand for public_routes: ['/*']. Recommended to use `public_routes` instead for more customization."
           },
           "actions": {
             "type": "array",
